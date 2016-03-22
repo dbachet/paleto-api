@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322060535) do
+ActiveRecord::Schema.define(version: 20160322062456) do
+
+  create_table "pallets", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "longitude",   precision: 10, scale: 6
+    t.decimal  "latitude",    precision: 10, scale: 6
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

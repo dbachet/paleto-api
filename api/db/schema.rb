@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322062456) do
+ActiveRecord::Schema.define(version: 20160322063007) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "content",    null: false
+    t.integer  "pallet_id",  null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pallets", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.decimal  "longitude",   precision: 10, scale: 6
-    t.decimal  "latitude",    precision: 10, scale: 6
+    t.string   "title",                                null: false
+    t.string   "description",                          null: false
+    t.decimal  "longitude",   precision: 10, scale: 6, null: false
+    t.decimal  "latitude",    precision: 10, scale: 6, null: false
+    t.integer  "user_id",                              null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

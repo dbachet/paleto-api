@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20160322063007) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content",    null: false
-    t.integer  "pallet_id",  null: false
-    t.integer  "user_id",    null: false
+    t.integer  "pallet_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160322063007) do
     t.string   "description",                          null: false
     t.decimal  "longitude",   precision: 10, scale: 6, null: false
     t.decimal  "latitude",    precision: 10, scale: 6, null: false
-    t.integer  "user_id",                              null: false
+    t.integer  "user_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

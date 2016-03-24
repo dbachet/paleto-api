@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe PalletsController, type: :controller do
-  describe 'GET index' do
+  let!(:user) { User.create(email: 'test@test.com', password: '12345678', password_confirmation: '12345678') }
 
+  describe 'GET index' do
+    let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
     it 'assigns @pallets' do
-      pallet = Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1)
       get :index
       expect(assigns(:pallets)).to eq([pallet])
     end
 
     it 'returns all pallets' do
-      pallet = Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1)
       all_pallets = {
         "pallets" =>
         [
@@ -31,15 +31,14 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'GET show' do
+    let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
 
     it 'assigns @pallet' do
-      pallet = Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1)
       get :show, id: pallet.id
       expect(assigns(:pallet)).to eq(pallet)
     end
 
     it 'returns the requested pallet' do
-      pallet = Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1)
       requested_pallet = {
         "pallet" =>
           {
@@ -109,7 +108,7 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'PATCH update' do
-    let(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1) }
+    let(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
 
     context 'when valid params' do
       subject { patch(:update, id: pallet.id, pallet: { title: 'foofoo', description: 'barbar', latitude: 2.222222, longitude: 2.222222 }) }
@@ -171,7 +170,7 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1) }
+    let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
     subject { delete(:destroy, id: pallet.id) }
 
     it 'destroys pallet' do

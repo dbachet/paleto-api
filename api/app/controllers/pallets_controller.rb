@@ -1,4 +1,5 @@
 class PalletsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @pallets = Pallet.all
@@ -13,6 +14,8 @@ class PalletsController < ApplicationController
   def create
     @pallet = Pallet.new(create_params)
 
+    authorize @pallet
+
     if @pallet.save
       render json: @pallet
     else
@@ -23,6 +26,8 @@ class PalletsController < ApplicationController
   def update
     @pallet = Pallet.find(params[:id])
 
+    authorize @pallet
+
     if @pallet.update_attributes(update_params)
       render json: @pallet
     else
@@ -32,6 +37,9 @@ class PalletsController < ApplicationController
 
   def destroy
     @pallet = Pallet.find(params[:id])
+
+    authorize @pallet
+
     @pallet.destroy
     render json: @pallet
   end

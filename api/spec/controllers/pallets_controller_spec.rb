@@ -57,6 +57,8 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'POST create' do
+    before { sign_in user }
+
     context 'when valid params' do
       subject { post(:create, pallet: { title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1 }) }
 
@@ -108,6 +110,8 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'PATCH update' do
+    before { sign_in user }
+
     let(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
 
     context 'when valid params' do
@@ -170,6 +174,8 @@ RSpec.describe PalletsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    before { sign_in user }
+
     let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
     subject { delete(:destroy, id: pallet.id) }
 

@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :pallets
   has_many :comments
+
+  def guest?
+    false
+  end
 end

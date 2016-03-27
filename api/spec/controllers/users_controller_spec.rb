@@ -48,6 +48,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST create' do
+    let!(:admin) { User.create(email: 'admin@bar.com', password: '12345678', password_confirmation: '12345678', admin: true) }
+    before { sign_in admin }
+
     context 'when valid params' do
       subject { post(:create, user: { email: 'foo@bar.com', password: '12345678', password_confirmation: '12345678' }) }
 
@@ -94,6 +97,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'PATCH update' do
+    before { sign_in user }
+
     let(:user) { User.create(email: 'foo@bar.com', password: '12345678', password_confirmation: '12345678') }
 
     context 'when valid params' do
@@ -143,6 +148,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    before { sign_in user }
+
     let!(:user) { User.create(email: 'foo@bar.com', password: '12345678', password_confirmation: '12345678') }
 
     subject { delete(:destroy, id: user.id) }

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @users = User.all
@@ -13,6 +14,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(create_params)
 
+    authorize @user
+
     if @user.save
       render json: @user
     else
@@ -23,6 +26,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    authorize @user
+
     if @user.update_attributes(update_params)
       render json: @user
     else
@@ -32,6 +37,9 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+
+    authorize @user
+
     @user.destroy
     render json: @user
   end

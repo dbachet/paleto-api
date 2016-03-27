@@ -51,6 +51,8 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'POST create' do
+    before { sign_in user }
+
     context 'when valid params' do
       subject { post(:create, comment: { content: 'foo', user_id: user.id, pallet_id: pallet.id }) }
 
@@ -97,6 +99,8 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'PATCH update' do
+    before { sign_in user }
+
     let(:comment) { Comment.create(content: 'foo', user_id: user.id, pallet_id: pallet.id) }
 
     context 'when valid params' do
@@ -146,6 +150,8 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    before { sign_in user }
+
     let!(:comment) { Comment.create(content: 'foo', user_id: user.id, pallet_id: pallet.id) }
 
     subject { delete(:destroy, id: comment.id) }

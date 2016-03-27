@@ -24,7 +24,7 @@ RSpec.describe PalletPolicy do
 
   permissions :create? do
     it 'denies access if guest user' do
-      expect(subject).not_to permit(guest, Pallet)
+      expect(subject).not_to permit(guest, Pallet.new)
     end
 
     it 'grants access if user logged in' do

@@ -11,11 +11,11 @@ RSpec.describe UsersController, type: :controller do
 
     it 'returns all users' do
       all_users = {
-        "users" =>
+        'users' =>
         [
           {
-            "id"          => 1,
-            "email"       => "foo@bar.com"
+            'id'          => 1,
+            'email'       => 'foo@bar.com'
           }
         ]
       }
@@ -35,10 +35,10 @@ RSpec.describe UsersController, type: :controller do
 
     it 'returns the requested user' do
       requested_user = {
-        "user" =>
+        'user' =>
           {
-            "id"          => 1,
-            "email"       => "foo@bar.com"
+            'id'          => 1,
+            'email'       => 'foo@bar.com'
           }
         }
       get :show, id: user.id
@@ -62,10 +62,10 @@ RSpec.describe UsersController, type: :controller do
         subject
 
         new_user = {
-          "user" =>
+          'user' =>
             {
-              "id"          => User.last.id,
-              "email"       => "foo@bar.com"
+              'id'          => User.last.id,
+              'email'       => 'foo@bar.com'
             }
           }
 
@@ -83,9 +83,9 @@ RSpec.describe UsersController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "email" => ["is invalid"]
+              'email' => ['is invalid']
             }
           }
 
@@ -112,10 +112,10 @@ RSpec.describe UsersController, type: :controller do
         subject
 
         updated_user = {
-          "user" =>
+          'user' =>
             {
-              "id"          => User.last.id,
-              "email"       => "foofoo@barbar.com"
+              'id'          => User.last.id,
+              'email'       => 'foofoo@barbar.com'
             }
           }
 
@@ -133,9 +133,9 @@ RSpec.describe UsersController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "email" => ["is invalid"]
+              'email' => ['is invalid']
             }
           }
 

@@ -12,15 +12,15 @@ RSpec.describe PalletsController, type: :controller do
 
     it 'returns all pallets' do
       all_pallets = {
-        "pallets" =>
+        'pallets' =>
         [
           {
-            "id"          => 1,
-            "title"       => "foo",
-            "description" => "bar",
-            "latitude"    => "1.111111",
-            "longitude"   => "1.111111",
-            "comments"    => []
+            'id'          => 1,
+            'title'       => 'foo',
+            'description' => 'bar',
+            'latitude'    => '1.111111',
+            'longitude'   => '1.111111',
+            'comments'    => []
           }
         ]
       }
@@ -40,14 +40,14 @@ RSpec.describe PalletsController, type: :controller do
 
     it 'returns the requested pallet' do
       requested_pallet = {
-        "pallet" =>
+        'pallet' =>
           {
-            "id"          => 1,
-            "title"       => "foo",
-            "description" => "bar",
-            "latitude"    => "1.111111",
-            "longitude"   => "1.111111",
-            "comments"    => []
+            'id'          => 1,
+            'title'       => 'foo',
+            'description' => 'bar',
+            'latitude'    => '1.111111',
+            'longitude'   => '1.111111',
+            'comments'    => []
           }
         }
       get :show, id: pallet.id
@@ -70,14 +70,14 @@ RSpec.describe PalletsController, type: :controller do
         subject
 
         new_pallet = {
-          "pallet" =>
+          'pallet' =>
             {
-              "id"          => Pallet.last.id,
-              "title"       => "foo",
-              "description" => "bar",
-              "latitude"    => "1.111111",
-              "longitude"   => "1.111111",
-              "comments"    => []
+              'id'          => Pallet.last.id,
+              'title'       => 'foo',
+              'description' => 'bar',
+              'latitude'    => '1.111111',
+              'longitude'   => '1.111111',
+              'comments'    => []
             }
           }
 
@@ -95,10 +95,10 @@ RSpec.describe PalletsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "title" => ["can't be blank"],
-              "description" => ["can't be blank"]
+              'title' => ["can't be blank"],
+              'description' => ["can't be blank"]
             }
           }
 
@@ -128,14 +128,14 @@ RSpec.describe PalletsController, type: :controller do
         subject
 
         updated_pallet = {
-          "pallet" =>
+          'pallet' =>
             {
-              "id"          => Pallet.last.id,
-              "title"       => "foofoo",
-              "description" => "barbar",
-              "latitude"    => "2.222222",
-              "longitude"   => "2.222222",
-              "comments"    => []
+              'id'          => Pallet.last.id,
+              'title'       => 'foofoo',
+              'description' => 'barbar',
+              'latitude'    => '2.222222',
+              'longitude'   => '2.222222',
+              'comments'    => []
             }
           }
 
@@ -156,12 +156,12 @@ RSpec.describe PalletsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "title" => ["can't be blank"],
-              "description" => ["can't be blank"],
-              "latitude" => ["can't be blank"],
-              "longitude" => ["can't be blank"]
+              'title' => ["can't be blank"],
+              'description' => ["can't be blank"],
+              'latitude' => ["can't be blank"],
+              'longitude' => ["can't be blank"]
             }
           }
 

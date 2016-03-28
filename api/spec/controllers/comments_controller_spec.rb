@@ -14,11 +14,11 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'returns all comments' do
       all_comments = {
-        "comments" =>
+        'comments' =>
         [
           {
-            "id"        => comment.id,
-            "content"   => "foo"
+            'id'        => comment.id,
+            'content'   => 'foo'
           }
         ]
       }
@@ -38,10 +38,10 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'returns the requested comment' do
       requested_comment = {
-        "comment" =>
+        'comment' =>
           {
-            "id"        => comment.id,
-            "content"   => "foo"
+            'id'        => comment.id,
+            'content'   => 'foo'
           }
         }
       get :show, id: comment.id
@@ -64,10 +64,10 @@ RSpec.describe CommentsController, type: :controller do
         subject
 
         new_comment = {
-          "comment" =>
+          'comment' =>
             {
-              "id"        => Comment.last.id,
-              "content"   => "foo"
+              'id'        => Comment.last.id,
+              'content'   => 'foo'
             }
           }
 
@@ -85,9 +85,9 @@ RSpec.describe CommentsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "content" => ["can't be blank"]
+              'content' => ["can't be blank"]
             }
           }
 
@@ -114,10 +114,10 @@ RSpec.describe CommentsController, type: :controller do
         subject
 
         updated_comment = {
-          "comment" =>
+          'comment' =>
             {
-              "id"        => Comment.last.id,
-              "content"   => "foofoo"
+              'id'        => Comment.last.id,
+              'content'   => 'foofoo'
             }
           }
 
@@ -135,9 +135,9 @@ RSpec.describe CommentsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          "errors" =>
+          'errors' =>
             {
-              "content" => ["can't be blank"],
+              'content' => ["can't be blank"],
             }
           }
 

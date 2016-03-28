@@ -11,14 +11,18 @@ RSpec.describe UsersController, type: :controller do
 
     it 'returns all users' do
       all_users = {
-        'users' =>
-        [
+        'data' => [
           {
-            'id'          => 1,
-            'email'       => 'foo@bar.com'
+            'id' =>"#{user.id}",
+            'type' => 'users',
+            'attributes' => {
+              'email' => 'foo@bar.com',
+              'admin' => false
+            }
           }
         ]
       }
+
       get :index
       expect(JSON.parse(response.body)).to eq all_users
       expect(response).to be_success
@@ -35,12 +39,16 @@ RSpec.describe UsersController, type: :controller do
 
     it 'returns the requested user' do
       requested_user = {
-        'user' =>
-          {
-            'id'          => 1,
-            'email'       => 'foo@bar.com'
+        'data' => {
+          'id' =>"#{user.id}",
+          'type' => 'users',
+          'attributes' => {
+            'email' => 'foo@bar.com',
+            'admin' => false
           }
         }
+      }
+
       get :show, id: user.id
       expect(JSON.parse(response.body)).to eq requested_user
       expect(response).to be_success
@@ -62,12 +70,15 @@ RSpec.describe UsersController, type: :controller do
         subject
 
         new_user = {
-          'user' =>
-            {
-              'id'          => User.last.id,
-              'email'       => 'foo@bar.com'
+          'data' => {
+            'id' =>"#{User.last.id}",
+            'type' => 'users',
+            'attributes' => {
+              'email' => 'foo@bar.com',
+              'admin' => false
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq new_user
         expect(response).to be_success
@@ -112,12 +123,15 @@ RSpec.describe UsersController, type: :controller do
         subject
 
         updated_user = {
-          'user' =>
-            {
-              'id'          => User.last.id,
-              'email'       => 'foofoo@barbar.com'
+          'data' => {
+            'id' =>"#{user.id}",
+            'type' => 'users',
+            'attributes' => {
+              'email' => 'foofoo@barbar.com',
+              'admin' => false
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq updated_user
         expect(response).to be_success

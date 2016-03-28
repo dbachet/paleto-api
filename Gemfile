@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'haml'
-gem 'active_model_serializers'
+gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git', tag: 'v0.10.0.rc4'
 gem 'pundit'
 gem 'rack-cors', require: 'rack/cors'
 

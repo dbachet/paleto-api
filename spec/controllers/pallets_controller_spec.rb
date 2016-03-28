@@ -12,18 +12,28 @@ RSpec.describe PalletsController, type: :controller do
 
     it 'returns all pallets' do
       all_pallets = {
-        'pallets' =>
-        [
+        'data' => [
           {
-            'id'          => 1,
-            'title'       => 'foo',
-            'description' => 'bar',
-            'latitude'    => '1.111111',
-            'longitude'   => '1.111111',
-            'comments'    => []
+            'id' => "#{pallet.id}",
+            'type' => 'pallets',
+            'attributes' => {
+              'title' => 'foo',
+              'description' => 'bar',
+              'latitude' => '1.111111',
+              'longitude' => '1.111111'
+            },
+            'relationships' => {
+              "comments" => {
+                "data" => []
+              },
+              'user' => {
+                'data' => { 'id' => "#{pallet.user_id}", 'type'=>'users'}
+              }
+            }
           }
         ]
       }
+
       get :index
       expect(JSON.parse(response.body)).to eq all_pallets
       expect(response).to be_success
@@ -40,16 +50,26 @@ RSpec.describe PalletsController, type: :controller do
 
     it 'returns the requested pallet' do
       requested_pallet = {
-        'pallet' =>
-          {
-            'id'          => 1,
-            'title'       => 'foo',
+        'data' => {
+          'id' => "#{pallet.id}",
+          'type' => 'pallets',
+          'attributes' => {
+            'title' => 'foo',
             'description' => 'bar',
-            'latitude'    => '1.111111',
-            'longitude'   => '1.111111',
-            'comments'    => []
+            'latitude' => '1.111111',
+            'longitude' => '1.111111'
+          },
+          'relationships' => {
+            "comments" => {
+              "data" => []
+            },
+            'user' => {
+              'data' => {'id'=>"#{pallet.user_id}", 'type'=>'users'}
+            }
           }
         }
+      }
+
       get :show, id: pallet.id
       expect(JSON.parse(response.body)).to eq requested_pallet
       expect(response).to be_success
@@ -60,7 +80,22 @@ RSpec.describe PalletsController, type: :controller do
     before { sign_in user }
 
     context 'when valid params' do
-      subject { post(:create, pallet: { title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user_id: 1 }) }
+      subject { post(:create,
+        data: {
+          type: 'pallets',
+          attributes: {
+            title: 'foo',
+            description: 'bar',
+            latitude: 1.111111,
+            longitude: 1.111111
+          },
+          relationships: {
+            user: {
+              data: { id: user.id, type: 'users' }
+            }
+          }
+        })
+      }
 
       it 'creates a pallet' do
         expect{ subject }.to change{ Pallet.count }.by(1)
@@ -70,16 +105,25 @@ RSpec.describe PalletsController, type: :controller do
         subject
 
         new_pallet = {
-          'pallet' =>
-            {
-              'id'          => Pallet.last.id,
-              'title'       => 'foo',
+          'data' => {
+            'id' => "#{Pallet.last.id}",
+            'type' => 'pallets',
+            'attributes' => {
+              'title' => 'foo',
               'description' => 'bar',
-              'latitude'    => '1.111111',
-              'longitude'   => '1.111111',
-              'comments'    => []
+              'latitude' => '1.111111',
+              'longitude' => '1.111111'
+            },
+            'relationships' => {
+              "comments" => {
+                "data" => []
+              },
+              'user' => {
+                'data' => {'id'=>"#{Pallet.last.user_id}", 'type'=>'users'}
+              }
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq new_pallet
         expect(response).to be_success
@@ -87,7 +131,22 @@ RSpec.describe PalletsController, type: :controller do
     end
 
     context 'when invalid params' do
-      subject { post(:create, pallet: { title: '', description: '', latitude: 1.111111, longitude: 1.111111, user_id: 1 }) }
+      subject { post(:create,
+        data: {
+          type: 'pallets',
+          attributes: {
+            title: '',
+            description: '',
+            latitude: 1.111111,
+            longitude: 1.111111
+          },
+          relationships: {
+            user: {
+              data: { id: user.id, type: 'users' }
+            }
+          }
+        })
+      }
 
       it 'does not create a pallet' do
         expect{ subject }.to change{ Pallet.count }.by(0)
@@ -115,7 +174,23 @@ RSpec.describe PalletsController, type: :controller do
     let(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
 
     context 'when valid params' do
-      subject { patch(:update, id: pallet.id, pallet: { title: 'foofoo', description: 'barbar', latitude: 2.222222, longitude: 2.222222 }) }
+      subject { patch(:update, id: pallet.id,
+        data: {
+          id: pallet.id,
+          type: 'pallets',
+          attributes: {
+            title: 'foofoo',
+            description: 'barbar',
+            latitude: 2.222222,
+            longitude: 2.222222
+          },
+          relationships: {
+            user: {
+              data: { id: user.id, type: 'users' }
+            }
+          }
+        })
+      }
 
       it 'updates a pallet' do
         expect{ subject }.to change{ pallet.reload.title }.to('foofoo')
@@ -128,16 +203,25 @@ RSpec.describe PalletsController, type: :controller do
         subject
 
         updated_pallet = {
-          'pallet' =>
-            {
-              'id'          => Pallet.last.id,
-              'title'       => 'foofoo',
+          'data' => {
+            'id' => "#{pallet.id}",
+            'type' => 'pallets',
+            'attributes' => {
+              'title' => 'foofoo',
               'description' => 'barbar',
-              'latitude'    => '2.222222',
-              'longitude'   => '2.222222',
-              'comments'    => []
+              'latitude' => '2.222222',
+              'longitude' => '2.222222'
+            },
+            'relationships' => {
+              "comments" => {
+                "data" => []
+              },
+              'user' => {
+                'data' => {'id'=>"#{pallet.user_id}", 'type'=>'users'}
+              }
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq updated_pallet
         expect(response).to be_success
@@ -145,7 +229,23 @@ RSpec.describe PalletsController, type: :controller do
     end
 
     context 'when invalid params' do
-      subject { patch(:update, id: pallet.id, pallet: { title: '', description: '', latitude: nil, longitude: nil }) }
+      subject { patch(:update, id: pallet.id,
+        data: {
+          id: pallet.id,
+          type: 'pallets',
+          attributes: {
+            title: '',
+            description: '',
+            latitude: nil,
+            longitude: nil
+          },
+          relationships: {
+            user: {
+              data: { id: pallet.user_id, type: 'users' }
+            }
+          }
+        })
+      }
 
       it 'does not update a pallet' do
         expect(pallet.reload.title).to eq('foo')

@@ -14,11 +14,15 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'returns all comments' do
       all_comments = {
-        'comments' =>
-        [
+        'data'=> [
           {
-            'id'        => comment.id,
-            'content'   => 'foo'
+            'id' => "#{comment.id}",
+            'type' => 'comments',
+            'attributes' => {'content'=>'foo'},
+            'relationships' => {
+              'user_id' => { 'data' => comment.user_id },
+              'pallet_id' => { 'data' => comment.pallet_id }
+            }
           }
         ]
       }
@@ -38,12 +42,17 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'returns the requested comment' do
       requested_comment = {
-        'comment' =>
-          {
-            'id'        => comment.id,
-            'content'   => 'foo'
+        'data' => {
+          'id' => "#{comment.id}",
+          'type' => 'comments',
+          'attributes' => {'content'=>'foo'},
+          'relationships'=> {
+            'user_id' => { 'data' => comment.user_id },
+            'pallet_id' => { 'data' => comment.pallet_id }
           }
         }
+      }
+
       get :show, id: comment.id
       expect(JSON.parse(response.body)).to eq requested_comment
       expect(response).to be_success
@@ -64,12 +73,16 @@ RSpec.describe CommentsController, type: :controller do
         subject
 
         new_comment = {
-          'comment' =>
-            {
-              'id'        => Comment.last.id,
-              'content'   => 'foo'
+          'data' => {
+            'id' => "#{Comment.last.id}",
+            'type' => 'comments',
+            'attributes' => {'content'=>'foo'},
+            'relationships' => {
+              'user_id' => { 'data' => Comment.last.user_id },
+              'pallet_id' => { 'data' => Comment.last.pallet_id }
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq new_comment
         expect(response).to be_success
@@ -114,12 +127,16 @@ RSpec.describe CommentsController, type: :controller do
         subject
 
         updated_comment = {
-          'comment' =>
-            {
-              'id'        => Comment.last.id,
-              'content'   => 'foofoo'
+          'data' => {
+            'id' => "#{Comment.last.id}",
+            'type' => 'comments',
+            'attributes' => { 'content' => 'foofoo' },
+            'relationships' => {
+              'user_id' => { 'data' => Comment.last.user_id },
+              'pallet_id' => { 'data' => Comment.last.pallet_id }
             }
           }
+        }
 
         expect(JSON.parse(response.body)).to eq updated_comment
         expect(response).to be_success

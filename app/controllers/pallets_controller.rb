@@ -47,10 +47,7 @@ class PalletsController < ApplicationController
   private
 
   def create_params
-    params.require(:pallet).permit(:title, :description, :latitude, :longitude, :user_id, comments: [])
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
   end
-
-  def update_params
-    params.require(:pallet).permit(:title, :description, :latitude, :longitude)
-  end
+  alias_method :update_params, :create_params
 end

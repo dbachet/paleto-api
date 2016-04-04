@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CommentsController, type: :controller do
+RSpec.describe Api::V1::CommentsController, type: :controller do
   let!(:user) { User.create(email: 'test@test.com', password: '12345678', password_confirmation: '12345678') }
   let!(:pallet) { Pallet.create(title: 'foo', description: 'bar', latitude: 1.111111, longitude: 1.111111, user: user) }
 

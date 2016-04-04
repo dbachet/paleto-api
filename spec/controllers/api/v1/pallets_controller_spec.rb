@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PalletsController, type: :controller do
+RSpec.describe Api::V1::PalletsController, type: :controller do
   let!(:user) { User.create(email: 'test@test.com', password: '12345678', password_confirmation: '12345678') }
 
   describe 'GET index' do

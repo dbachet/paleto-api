@@ -23,8 +23,8 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
               'longitude' => '1.111111'
             },
             'relationships' => {
-              "comments" => {
-                "data" => []
+              'comments' => {
+                'data' => []
               },
               'user' => {
                 'data' => { 'id' => "#{pallet.user_id}", 'type'=>'users'}
@@ -60,8 +60,8 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
             'longitude' => '1.111111'
           },
           'relationships' => {
-            "comments" => {
-              "data" => []
+            'comments' => {
+              'data' => []
             },
             'user' => {
               'data' => {'id'=>"#{pallet.user_id}", 'type'=>'users'}
@@ -115,8 +115,8 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
               'longitude' => '1.111111'
             },
             'relationships' => {
-              "comments" => {
-                "data" => []
+              'comments' => {
+                'data' => []
               },
               'user' => {
                 'data' => {'id'=>"#{Pallet.last.user_id}", 'type'=>'users'}
@@ -154,12 +154,21 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          'errors' =>
+          'errors' => [
             {
-              'title' => ["can't be blank"],
-              'description' => ["can't be blank"]
+              'source' => {
+                'pointer' => '/data/attributes/title'
+              },
+              'detail' => "can't be blank"
+            },
+            {
+              'source' => {
+                'pointer' => '/data/attributes/description'
+              },
+              'detail' => "can't be blank"
             }
-          }
+          ]
+        }
 
         subject
         expect(JSON.parse(response.body)).to eq(errors)
@@ -213,8 +222,8 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
               'longitude' => '2.222222'
             },
             'relationships' => {
-              "comments" => {
-                "data" => []
+              'comments' => {
+                'data' => []
               },
               'user' => {
                 'data' => {'id'=>"#{pallet.user_id}", 'type'=>'users'}
@@ -256,14 +265,33 @@ RSpec.describe Api::V1::PalletsController, type: :controller do
 
       it 'returns errors' do
         errors = {
-          'errors' =>
+          'errors' => [
             {
-              'title' => ["can't be blank"],
-              'description' => ["can't be blank"],
-              'latitude' => ["can't be blank"],
-              'longitude' => ["can't be blank"]
+              'source' => {
+                'pointer' => '/data/attributes/title'
+              },
+              'detail' => "can't be blank"
+            },
+            {
+              'source' => {
+                'pointer' => '/data/attributes/description'
+              },
+              'detail' => "can't be blank"
+            },
+            {
+              'source' => {
+                'pointer' => '/data/attributes/latitude'
+              },
+              'detail' => "can't be blank"
+            },
+            {
+              'source' => {
+                'pointer' => '/data/attributes/longitude'
+              },
+              'detail' => "can't be blank"
             }
-          }
+          ]
+        }
 
         subject
         expect(JSON.parse(response.body)).to eq(errors)

@@ -20,8 +20,8 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
             'type' => 'comments',
             'attributes' => {'content'=>'foo'},
             'relationships' => {
-              'user_id' => { 'data' => comment.user_id },
-              'pallet_id' => { 'data' => comment.pallet_id }
+              'user-id' => { 'data' => comment.user_id },
+              'pallet-id' => { 'data' => comment.pallet_id }
             }
           }
         ]
@@ -47,8 +47,8 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
           'type' => 'comments',
           'attributes' => {'content'=>'foo'},
           'relationships'=> {
-            'user_id' => { 'data' => comment.user_id },
-            'pallet_id' => { 'data' => comment.pallet_id }
+            'user-id' => { 'data' => comment.user_id },
+            'pallet-id' => { 'data' => comment.pallet_id }
           }
         }
       }
@@ -78,8 +78,8 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
             'type' => 'comments',
             'attributes' => {'content'=>'foo'},
             'relationships' => {
-              'user_id' => { 'data' => Comment.last.user_id },
-              'pallet_id' => { 'data' => Comment.last.pallet_id }
+              'user-id' => { 'data' => Comment.last.user_id },
+              'pallet-id' => { 'data' => Comment.last.pallet_id }
             }
           }
         }
@@ -132,8 +132,8 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
             'type' => 'comments',
             'attributes' => { 'content' => 'foofoo' },
             'relationships' => {
-              'user_id' => { 'data' => Comment.last.user_id },
-              'pallet_id' => { 'data' => Comment.last.pallet_id }
+              'user-id' => { 'data' => Comment.last.user_id },
+              'pallet-id' => { 'data' => Comment.last.pallet_id }
             }
           }
         }

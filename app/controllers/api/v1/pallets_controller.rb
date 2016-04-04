@@ -21,7 +21,7 @@ module Api
         if @pallet.save
           render json: @pallet
         else
-          render json: { errors: @pallet.errors.messages }, status: :unprocessable_entity
+          render json: @pallet, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
         end
       end
 
@@ -33,7 +33,7 @@ module Api
         if @pallet.update_attributes(update_params)
           render json: @pallet
         else
-          render json: { errors: @pallet.errors.messages }, status: :unprocessable_entity
+          render json: @pallet, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
         end
       end
 
